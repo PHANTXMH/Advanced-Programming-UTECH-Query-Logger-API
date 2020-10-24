@@ -1,5 +1,8 @@
 package com.ap.covid19.api.apcovid19.controllers;
 
+import com.ap.covid19.api.apcovid19.models.User;
+import com.ap.covid19.api.apcovid19.repositories.UserRepository;
+import com.ap.covid19.api.apcovid19.security.jwt.JwtAuthTokenFilter;
 import com.ap.covid19.api.apcovid19.security.jwt.JwtProvider;
 import com.ap.covid19.api.apcovid19.security.request.LoginForm;
 import com.ap.covid19.api.apcovid19.security.response.JwtResponse;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,6 +31,8 @@ public class AuthenticationController {
     private final JwtProvider jwtProvider;
 
     private final AuthenticationManager authenticationManager;
+
+    private final UserRepository userRepository;
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -39,7 +45,9 @@ public class AuthenticationController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtProvider.generateJwtToken(authentication);
-        return ResponseEntity.ok(new JwtResponse(jwt));
+        final Optional<User> user = userRepository.findByUserName(loginRequest.getUsername());
+        user.ifPresent(user1 -> log.info("Auth User details: {}", user1));
+        return ResponseEntity.ok(new JwtResponse(jwt, user.orElse(null)));
     }
 
 }

@@ -1,7 +1,7 @@
 security:
   app:
     jwtSecret: UIWEWERhjsadghAdvanceProgramming2020secret
-    jwtExpiration: 311040000
+    jwtExpiration: 311040000 # long expiration date
 server:
   port: 8005
 spring:

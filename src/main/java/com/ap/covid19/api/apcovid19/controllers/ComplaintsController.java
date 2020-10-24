@@ -1,11 +1,11 @@
 package com.ap.covid19.api.apcovid19.controllers;
 
+import com.ap.covid19.api.apcovid19.models.ApiResponse;
 import com.ap.covid19.api.apcovid19.models.Complaints;
 import com.ap.covid19.api.apcovid19.services.ComplaintsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,19 +26,19 @@ public class ComplaintsController {
 
 
     @PostMapping(value = "/create", produces = "application/json")
-    public ResponseEntity<Complaints> createComplaints(@Valid @RequestBody Complaints complaints){
+    public ResponseEntity<Complaints> createComplaints(@Valid @RequestBody Complaints complaints) throws IllegalAccessException {
         return new ResponseEntity<>(complaintsService.createComplaints(complaints), HttpStatus.OK);
     }
 
 
     @PutMapping(value = "/update", produces = "application/json")
-    public ResponseEntity<Complaints> updateComplaints(@Valid @RequestBody Complaints complaints){
+    public ResponseEntity<ApiResponse<Complaints>> updateComplaints(@Valid @RequestBody Complaints complaints) throws IllegalAccessException {
         return new ResponseEntity<>(complaintsService.updateComplaints(complaints), HttpStatus.OK);
     }
 
 
-    @PutMapping(value = "/delete/{complaint_id}", produces = "application/json")
-    public ResponseEntity<Complaints> deleteComplaints(@PathVariable("complaint_id") Long complaintID){
+    @DeleteMapping(value = "/delete/{complaint_id}", produces = "application/json")
+    public ResponseEntity<ApiResponse<Complaints>> deleteComplaints(@PathVariable("complaint_id") Long complaintID){
         return new ResponseEntity<>(complaintsService.deleteComplaints(complaintID), HttpStatus.OK);
     }
 
