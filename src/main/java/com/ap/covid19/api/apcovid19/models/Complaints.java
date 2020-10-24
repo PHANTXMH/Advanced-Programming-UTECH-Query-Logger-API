@@ -1,5 +1,6 @@
 package com.ap.covid19.api.apcovid19.models;
 
+import com.ap.covid19.api.apcovid19.converters.StringAttributeConverter;
 import com.ap.covid19.api.apcovid19.enumerations.ComplainStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -42,7 +43,7 @@ public class Complaints extends TimeStamp{
     @NotNull
     @Column(columnDefinition = "TEXT")
     @Size(min = 25, max = 5000)
-    @Type(type = "text")
+    @Convert(converter = StringAttributeConverter.class)
     private String query;
 
     @OneToMany(mappedBy = "complaints")
