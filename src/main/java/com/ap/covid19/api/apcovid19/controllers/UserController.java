@@ -30,7 +30,7 @@ public class UserController {
         return new ResponseEntity<>(usersService.getUserByID(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/by/id/{role}", produces = "application/json")
+    @GetMapping(value = "/by/role/{role}", produces = "application/json")
     public ResponseEntity<List<User>> getAllUsers(@PathVariable("role") Role role){
         return new ResponseEntity<>(usersService.getAllUsersByRole(role), HttpStatus.OK);
     }

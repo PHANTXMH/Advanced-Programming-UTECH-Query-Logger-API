@@ -21,7 +21,7 @@ public class UsersService extends BaseServiceHelper implements UsersInt {
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll(Sort.by("last_name", "desc"));
+        return userRepository.findAllByOrderByLastNameDesc();
     }
 
     @Override
