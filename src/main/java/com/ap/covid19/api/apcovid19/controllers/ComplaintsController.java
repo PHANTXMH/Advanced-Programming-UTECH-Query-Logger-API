@@ -19,17 +19,10 @@ public class ComplaintsController {
     private final ComplaintsService complaintsService;
 
 
-    @GetMapping(value = "/by/student/id/{student_id}", produces = "application/json")
-    public ResponseEntity<List<Complaints>> getComplaintsByStudentID(@PathVariable("student_id") Long studentID){
-        return new ResponseEntity<>(complaintsService.getAllComplainsByStudentID(studentID), HttpStatus.OK);
-    }
-
-
     @PostMapping(value = "/create", produces = "application/json")
     public ResponseEntity<Complaints> createComplaints(@Valid @RequestBody Complaints complaints) throws IllegalAccessException {
         return new ResponseEntity<>(complaintsService.createComplaints(complaints), HttpStatus.OK);
     }
-
 
     @PutMapping(value = "/update", produces = "application/json")
     public ResponseEntity<ApiResponse<Complaints>> updateComplaints(@Valid @RequestBody Complaints complaints) throws IllegalAccessException {
@@ -40,6 +33,16 @@ public class ComplaintsController {
     @DeleteMapping(value = "/delete/{complaint_id}", produces = "application/json")
     public ResponseEntity<ApiResponse<Complaints>> deleteComplaints(@PathVariable("complaint_id") Long complaintID){
         return new ResponseEntity<>(complaintsService.deleteComplaints(complaintID), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/by/student/id/{student_id}", produces = "application/json")
+    public ResponseEntity<List<Complaints>> getComplaintsByStudentID(@PathVariable("student_id") Long studentID){
+        return new ResponseEntity<>(complaintsService.getAllComplainsByStudentID(studentID), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/by/id/{complaint_id}", produces = "application/json")
+    public ResponseEntity<Complaints> getComplaintsByID(@PathVariable("complaint_id") Long complaintID){
+        return new ResponseEntity<>(complaintsService.getComplaintsByID(complaintID), HttpStatus.OK);
     }
 
 

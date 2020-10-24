@@ -41,6 +41,13 @@ public class ComplaintsService extends BaseServiceHelper implements ComplaintsIn
     }
 
     @Override
+    public Complaints getComplaintsByID(Long complaintID) {
+
+        return complaintsRepository.findById(complaintID).orElseThrow(() ->
+                new ComplaintNotFoundException(String.format("Complaint with ID %s not found", complaintID)));
+    }
+
+    @Override
     public ApiResponse<Complaints> updateComplaints(Complaints complaints) throws IllegalAccessException, IllegalStateException{
 
         Complaints complaintToEdit = complaintsRepository.findAllByCreatedUser_IdAndId(this.getUserDetails().getId(), complaints.getId()).orElseThrow( () -> new
@@ -83,5 +90,10 @@ public class ComplaintsService extends BaseServiceHelper implements ComplaintsIn
         complaintsRepository.delete(complaintToDelete);
 
         return new ApiResponse<>(HttpStatus.OK, "Complaint was successfully deleted", null, null, true);
+    }
+
+    @Override
+    public List<Complaints> findAllComplaintsByServiceID(Long serviceID) {
+        return complaintsRepository.findAllByServices_Id(serviceID);
     }
 }

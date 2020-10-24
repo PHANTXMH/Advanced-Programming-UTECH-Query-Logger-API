@@ -10,7 +10,8 @@ public interface ComplaintsRepository extends JpaRepository<Complaints, Long> {
 
     List<Complaints> findAllByCreatedUser_IdOrderByCreatedAtDesc(Long userID);
 
-
     Optional<Complaints> findAllByCreatedUser_IdAndId(Long userID, Long complaintID);
+
+    List<Complaints> findAllByServices_Id(Long complaintID);
 
 }
