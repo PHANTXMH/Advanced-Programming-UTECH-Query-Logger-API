@@ -96,4 +96,9 @@ public class ComplaintsService extends BaseServiceHelper implements ComplaintsIn
     public List<Complaints> findAllComplaintsByServiceID(Long serviceID) {
         return complaintsRepository.findAllByServices_Id(serviceID);
     }
+
+    @Override
+    public List<Complaints> getAllComplainsByStudentIDAndStatus(Long studentID, ComplainStatus complainStatus) {
+        return complaintsRepository.findAllByCreatedUser_IdAndComplainStatusOrderByCreatedAtDesc(studentID, complainStatus);
+    }
 }

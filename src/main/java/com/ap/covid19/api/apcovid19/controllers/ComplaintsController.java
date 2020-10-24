@@ -1,5 +1,6 @@
 package com.ap.covid19.api.apcovid19.controllers;
 
+import com.ap.covid19.api.apcovid19.enumerations.ComplainStatus;
 import com.ap.covid19.api.apcovid19.models.ApiResponse;
 import com.ap.covid19.api.apcovid19.models.Complaints;
 import com.ap.covid19.api.apcovid19.services.ComplaintsService;
@@ -38,6 +39,11 @@ public class ComplaintsController {
     @GetMapping(value = "/by/student/id/{student_id}", produces = "application/json")
     public ResponseEntity<List<Complaints>> getComplaintsByStudentID(@PathVariable("student_id") Long studentID){
         return new ResponseEntity<>(complaintsService.getAllComplainsByStudentID(studentID), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/by/student/id/and/status{student_id}/{status}", produces = "application/json")
+    public ResponseEntity<List<Complaints>> getComplaintsByStudentIDAndStatus(@PathVariable("student_id") Long studentID, @PathVariable("status") ComplainStatus status){
+        return new ResponseEntity<>(complaintsService.getAllComplainsByStudentIDAndStatus(studentID, status), HttpStatus.OK);
     }
 
     @GetMapping(value = "/by/id/{complaint_id}", produces = "application/json")

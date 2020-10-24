@@ -1,11 +1,10 @@
 package com.ap.covid19.api.apcovid19.interfaces;
 
+import com.ap.covid19.api.apcovid19.enumerations.ComplainStatus;
 import com.ap.covid19.api.apcovid19.models.ApiResponse;
 import com.ap.covid19.api.apcovid19.models.Complaints;
-import com.ap.covid19.api.apcovid19.models.Services;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ComplaintsInt {
 
@@ -20,5 +19,7 @@ public interface ComplaintsInt {
     ApiResponse<Complaints> deleteComplaints(final Long complaintID);
 
     List<Complaints> findAllComplaintsByServiceID(Long serviceID);
+
+    List<Complaints> getAllComplainsByStudentIDAndStatus(Long studentID, ComplainStatus complainStatus);
 
 }

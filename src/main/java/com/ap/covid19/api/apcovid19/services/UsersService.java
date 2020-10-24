@@ -7,7 +7,6 @@ import com.ap.covid19.api.apcovid19.models.User;
 import com.ap.covid19.api.apcovid19.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

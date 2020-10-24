@@ -1,5 +1,6 @@
 package com.ap.covid19.api.apcovid19.repositories;
 
+import com.ap.covid19.api.apcovid19.enumerations.ComplainStatus;
 import com.ap.covid19.api.apcovid19.models.Complaints;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,5 +14,8 @@ public interface ComplaintsRepository extends JpaRepository<Complaints, Long> {
     Optional<Complaints> findAllByCreatedUser_IdAndId(Long userID, Long complaintID);
 
     List<Complaints> findAllByServices_Id(Long complaintID);
+
+    List<Complaints> findAllByCreatedUser_IdAndComplainStatusOrderByCreatedAtDesc(Long userID, ComplainStatus complainStatus);
+
 
 }
