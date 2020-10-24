@@ -31,4 +31,8 @@ public class Services extends TimeStamp{
     @OneToMany(mappedBy = "services")
     private List<Complaints> complaints;
 
+    public Services(Long id){
+        this.id = id;
+    }
+
 }
