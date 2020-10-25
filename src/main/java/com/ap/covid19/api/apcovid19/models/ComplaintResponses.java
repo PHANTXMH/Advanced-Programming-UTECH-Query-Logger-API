@@ -1,13 +1,17 @@
 package com.ap.covid19.api.apcovid19.models;
 
 
+import com.ap.covid19.api.apcovid19.converters.StringAttributeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Setter
@@ -23,8 +27,10 @@ public class ComplaintResponses extends TimeStamp{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
-    @Column
+    @NotNull
+    @Column(columnDefinition = "TEXT")
+    @Size(min = 25, max = 5000)
+    @Convert(converter = StringAttributeConverter.class)
     private String response;
 
     @Column

@@ -1,5 +1,6 @@
 package com.ap.covid19.api.apcovid19.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "services")
 @Where(clause = "deleted_at is null")
-public class Services {
+public class Services extends TimeStamp{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +27,12 @@ public class Services {
 
     private String icon;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "services")
     private List<Complaints> complaints;
+
+    public Services(Long id){
+        this.id = id;
+    }
 
 }

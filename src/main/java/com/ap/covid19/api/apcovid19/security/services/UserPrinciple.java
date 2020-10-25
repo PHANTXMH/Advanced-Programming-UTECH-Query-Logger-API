@@ -1,5 +1,6 @@
 package com.ap.covid19.api.apcovid19.security.services;
 
+import com.ap.covid19.api.apcovid19.enumerations.Role;
 import com.ap.covid19.api.apcovid19.models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -22,35 +23,36 @@ public class UserPrinciple implements UserDetails {
 
     private String lastName;
 
-
     private String email;
+
+    private String username;
+
+    private Role role;
 
     @JsonIgnore
     private String password;
 
-    //private Collection<? extends GrantedAuthority> authorities;
-    // Collection<? extends GrantedAuthority> authorities
 
-
-    public UserPrinciple(Long id, String firstName, String lastName, String email, String password) {
+    public UserPrinciple(Long id, String firstName, String lastName, String email, String password, String username, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.username = username;
+        this.role = role;
     }
 
     public static UserPrinciple build(User user) {
-//        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
-//                new SimpleGrantedAuthority(role.getName().name())
-//        ).collect(Collectors.toList());
 
         return new UserPrinciple(
-                user.getUserName(),
+                user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
-                user.getPassword()
+                user.getPassword(),
+                user.getUserName(),
+                user.getRole()
         );
     }
 
@@ -66,7 +68,7 @@ public class UserPrinciple implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

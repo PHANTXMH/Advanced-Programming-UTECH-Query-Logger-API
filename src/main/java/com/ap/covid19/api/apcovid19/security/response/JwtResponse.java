@@ -1,28 +1,24 @@
 package com.ap.covid19.api.apcovid19.security.response;
 
+import com.ap.covid19.api.apcovid19.models.User;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class JwtResponse {
 
     private String token;
     private String type = "Bearer";
+    private User user;
 
-    public JwtResponse(String accessToken) {
+    public JwtResponse(String accessToken, User user) {
         this.token = accessToken;
-    }
-
-    public String getAccessToken() {
-        return token;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.token = accessToken;
-    }
-
-    public String getTokenType() {
-        return type;
-    }
-
-    public void setTokenType(String tokenType) {
-        this.type = tokenType;
+        this.user = user;
     }
 
 }

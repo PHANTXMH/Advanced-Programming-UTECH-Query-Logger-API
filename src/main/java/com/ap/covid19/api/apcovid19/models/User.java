@@ -26,6 +26,7 @@ import java.io.Serializable;
 @Where(clause = "deleted_at is null")
 public class User extends TimeStamp implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,7 +34,7 @@ public class User extends TimeStamp implements Serializable {
     @NotBlank
     @Size(min = 7, max = 7)
     @Column(name = "username")
-    private Long userName;
+    private String userName;
 
     @NotBlank
     @Size(min = 3, max = 50)
@@ -64,5 +65,10 @@ public class User extends TimeStamp implements Serializable {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public User(Long id, String email){
+        this.id = id;
+        this.email = email;
+    }
 
 }
