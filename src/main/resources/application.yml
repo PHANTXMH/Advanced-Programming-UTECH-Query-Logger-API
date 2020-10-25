@@ -7,13 +7,16 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    password: root
-    url: jdbc:postgresql://localhost:5432/AP_COVID19
-    username: postgres
+#    password: root
+#    url: jdbc:postgresql://localhost:5432/AP_COVID19
+#    username: postgres
+    password: cdca66f672bbe6d74bec705636b11d04ae0ff6f0cfd1bcd336452123b1c2b4ee
+    url: postgres://tuocutefucnusn:cdca66f672bbe6d74bec705636b11d04ae0ff6f0cfd1bcd336452123b1c2b4ee@ec2-18-210-180-94.compute-1.amazonaws.com:5432/dcl7ho3418aov8
+    username: tuocutefucnusn
     initialization-mode: always
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
