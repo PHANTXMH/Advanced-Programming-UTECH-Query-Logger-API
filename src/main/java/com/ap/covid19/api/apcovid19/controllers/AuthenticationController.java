@@ -2,7 +2,6 @@ package com.ap.covid19.api.apcovid19.controllers;
 
 import com.ap.covid19.api.apcovid19.models.User;
 import com.ap.covid19.api.apcovid19.repositories.UserRepository;
-import com.ap.covid19.api.apcovid19.security.jwt.JwtAuthTokenFilter;
 import com.ap.covid19.api.apcovid19.security.jwt.JwtProvider;
 import com.ap.covid19.api.apcovid19.security.request.LoginForm;
 import com.ap.covid19.api.apcovid19.security.response.JwtResponse;
