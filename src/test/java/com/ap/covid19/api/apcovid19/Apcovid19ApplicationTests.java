@@ -18,10 +18,6 @@ class Apcovid19ApplicationTests {
     private ComplaintsRepository complaintsRepository;
 
     @Test
-    void contextLoads() {
-    }
-
-    @Test
     void readDecryptedComplaints(){
         Complaints complaints = new Complaints();
         complaints.setServices(new Services(1L));
@@ -33,6 +29,10 @@ class Apcovid19ApplicationTests {
                 new ComplaintNotFoundException(String.format("Complaints with ID %s not found", complaints.getId())));
 
         Assertions.assertEquals(complaints.getQuery(), complaintsSaved.getQuery());
+    }
+
+    @Test
+    void contextLoads() {
     }
 
 }

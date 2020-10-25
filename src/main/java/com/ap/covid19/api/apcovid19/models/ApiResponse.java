@@ -16,9 +16,8 @@ public class ApiResponse<T> {
     private HttpStatus status;
     private String message;
     private List<String> errors;
-    private Object data;
+    private T data;
     private boolean success;
-
     public ApiResponse(HttpStatus status, String message, List<String> errors){
         this.status = status;
         this.message = message;

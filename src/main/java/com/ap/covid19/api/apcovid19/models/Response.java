@@ -14,6 +14,7 @@ import java.util.Set;
 public class Response<T> {
 
     private boolean success;
+    //private HttpStatus httpStatus;
     private boolean message;
     private Set<String> errorMessages;
     private Object object;
