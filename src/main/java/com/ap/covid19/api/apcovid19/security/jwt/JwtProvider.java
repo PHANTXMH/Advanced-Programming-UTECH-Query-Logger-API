@@ -1,14 +1,21 @@
 package com.ap.covid19.api.apcovid19.security.jwt;
 
+import com.ap.covid19.api.apcovid19.models.User;
+import com.ap.covid19.api.apcovid19.repositories.UserRepository;
+import com.ap.covid19.api.apcovid19.security.services.UserDetailsServiceImpl;
 import io.jsonwebtoken.*;
 import com.ap.covid19.api.apcovid19.security.services.UserPrinciple;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Component
 public class JwtProvider {
@@ -21,12 +28,18 @@ public class JwtProvider {
     @Value("${security.app.jwtExpiration}")
     private int jwtExpiration;
 
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private UserRepository userRepository;
+
     public String generateJwtToken(Authentication authentication) {
 
         UserPrinciple userPrincipal = (UserPrinciple) authentication.getPrincipal();
 
         return Jwts.builder()
-                .setSubject((userPrincipal.getEmail()))
+                .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpiration))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
@@ -38,6 +51,20 @@ public class JwtProvider {
                 .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)
                 .getBody().getSubject();
+    }
+
+    public Optional<User> getUserFromJWT(final String jwtToken){
+        Optional<User> user = null;
+        if (jwtToken != null && jwtToken.startsWith("Bearer ")) {
+            final String finalToken = jwtToken.replace("Bearer ","");
+            if(this.validateJwtToken(finalToken)){
+                final String username = this.getUserNameFromJwtToken(finalToken);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                if(userDetails != null)
+                    user = userRepository.findByUserName(userDetails.getUsername());
+            }
+        }
+        return user;
     }
 
     public boolean validateJwtToken(String authToken) {
