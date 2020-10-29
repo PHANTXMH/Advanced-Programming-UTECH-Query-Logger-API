@@ -5,9 +5,11 @@ import com.ap.covid19.api.apcovid19.enumerations.ComplainStatus;
 import com.ap.covid19.api.apcovid19.models.User;
 import com.ap.covid19.api.apcovid19.security.services.UserPrinciple;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
+@Component
 public class BaseServiceHelper {
 
 

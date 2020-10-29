@@ -22,7 +22,7 @@ public class ComplaintsController {
 
     @PostMapping(value = "/create", produces = "application/json")
     public ResponseEntity<Complaints> createComplaints(@Valid @RequestBody Complaints complaints) throws IllegalAccessException {
-        return new ResponseEntity<>(complaintsService.createComplaints(complaints), HttpStatus.OK);
+        return new ResponseEntity<>(complaintsService.createComplaints(complaints), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/update", produces = "application/json")

@@ -5,18 +5,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
-
 @Setter
 @Getter
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class Response<T> {
-
-    private boolean success;
-    //private HttpStatus httpStatus;
-    private boolean message;
-    private Set<String> errorMessages;
-    private Object object;
-
+public class Greeting {
+    private String name;
 }

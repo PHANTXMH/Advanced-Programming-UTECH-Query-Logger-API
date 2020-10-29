@@ -77,6 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/v2/api-docs",
                 "/csrf/**",
                 "/",
+                "/**", // remove when deployed...this defeats the purpose of security
                 "/swagger-ui.html");
     }
 
