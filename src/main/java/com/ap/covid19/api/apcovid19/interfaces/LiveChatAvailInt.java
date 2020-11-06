@@ -10,9 +10,9 @@ public interface LiveChatAvailInt {
 
     ApiResponse createAvailableDays(List<LiveChatAvailability> liveChatAvailabilities);
 
-    ApiResponse deleteAvailableDays(Long id);
+    ApiResponse deleteAvailableDays(final Long id) throws IllegalAccessException;
 
-    List<LiveChatAvailability> viewAllByStudentRepID(String studentRepID);
+    List<LiveChatAvailability> viewAllByStudentRepID(Long studentRepID);
 
     boolean isDayForUserAlreadyExists(Day day, Long userID);
 

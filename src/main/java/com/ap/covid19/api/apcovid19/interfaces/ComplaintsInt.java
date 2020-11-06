@@ -10,7 +10,7 @@ public interface ComplaintsInt {
 
     List<Complaints> getAllComplainsByStudentID(final Long studentID);
 
-    Complaints createComplaints(final Complaints complaints) throws IllegalAccessException;
+    ApiResponse<Complaints> createComplaints(final Complaints complaints) throws IllegalAccessException;
 
     Complaints getComplaintsByID(final Long complaintID);
 
@@ -21,5 +21,8 @@ public interface ComplaintsInt {
     List<Complaints> findAllComplaintsByServiceID(Long serviceID);
 
     List<Complaints> getAllComplainsByStudentIDAndStatus(Long studentID, ComplainStatus complainStatus);
+
+
+    List<Complaints> getComplaintsByDistinctUserAndStatus(ComplainStatus complainStatus);
 
 }

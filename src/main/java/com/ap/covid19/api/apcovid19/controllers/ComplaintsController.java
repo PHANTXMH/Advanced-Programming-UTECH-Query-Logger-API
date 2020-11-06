@@ -21,7 +21,7 @@ public class ComplaintsController {
 
 
     @PostMapping(value = "/create", produces = "application/json")
-    public ResponseEntity<Complaints> createComplaints(@Valid @RequestBody Complaints complaints) throws IllegalAccessException {
+    public ResponseEntity<ApiResponse<Complaints>> createComplaints(@Valid @RequestBody Complaints complaints) throws IllegalAccessException {
         return new ResponseEntity<>(complaintsService.createComplaints(complaints), HttpStatus.CREATED);
     }
 
@@ -49,6 +49,11 @@ public class ComplaintsController {
     @GetMapping(value = "/by/id/{complaint_id}", produces = "application/json")
     public ResponseEntity<Complaints> getComplaintsByID(@PathVariable("complaint_id") Long complaintID){
         return new ResponseEntity<>(complaintsService.getComplaintsByID(complaintID), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/all/distinct/user/and/status/{status}", produces = "application/json")
+    public ResponseEntity<List<Complaints>> getComplaintsByDistinctUserAndStatus(@PathVariable("status") ComplainStatus status){
+        return new ResponseEntity<>(complaintsService.getComplaintsByDistinctUserAndStatus(status), HttpStatus.OK);
     }
 
 

@@ -17,5 +17,7 @@ public interface ComplaintsRepository extends JpaRepository<Complaints, Long> {
 
     List<Complaints> findAllByCreatedUser_IdAndComplainStatusOrderByCreatedAtDesc(Long userID, ComplainStatus complainStatus);
 
+    List<Complaints> findDistinctCreatedUser_IdAndAndComplainStatus(ComplainStatus complainStatus);
 
+    List<Complaints> getDistinctTopBy();
 }

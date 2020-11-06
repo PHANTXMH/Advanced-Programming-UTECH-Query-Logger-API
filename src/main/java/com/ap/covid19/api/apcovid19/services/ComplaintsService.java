@@ -31,13 +31,15 @@ public class ComplaintsService extends BaseServiceHelper implements ComplaintsIn
     }
 
     @Override
-    public Complaints createComplaints(Complaints complaints) throws IllegalAccessException{
+    public ApiResponse<Complaints> createComplaints(Complaints complaints) throws IllegalAccessException{
 
         complaints.setCreatedUser(this.getAuthenticatedUser());
 
         complaints.setComplainStatus(ComplainStatus.NEW);
 
-        return complaintsRepository.save(complaints);
+        complaintsRepository.save(complaints);
+
+        return new ApiResponse<>(HttpStatus.OK, "Complaint was created successfully", null, complaints, true);
     }
 
     @Override
@@ -100,5 +102,10 @@ public class ComplaintsService extends BaseServiceHelper implements ComplaintsIn
     @Override
     public List<Complaints> getAllComplainsByStudentIDAndStatus(Long studentID, ComplainStatus complainStatus) {
         return complaintsRepository.findAllByCreatedUser_IdAndComplainStatusOrderByCreatedAtDesc(studentID, complainStatus);
+    }
+
+    @Override
+    public List<Complaints> getComplaintsByDistinctUserAndStatus(ComplainStatus complainStatus) {
+        return complaintsRepository.findDistinctCreatedUser_IdAndAndComplainStatus(complainStatus);
     }
 }

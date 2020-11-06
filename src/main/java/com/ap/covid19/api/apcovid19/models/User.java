@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Setter
 @Getter
@@ -65,6 +66,10 @@ public class User extends TimeStamp implements Serializable {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
+
+//    @OneToMany
+//    @JoinColumn(name = "created_user_id")
+//    private List<Complaints> complaints;
 
     public User(Long id, String email){
         this.id = id;

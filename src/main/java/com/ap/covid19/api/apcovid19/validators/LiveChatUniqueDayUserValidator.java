@@ -12,10 +12,11 @@ import javax.validation.ConstraintValidatorContext;
 import javax.validation.constraintvalidation.SupportedValidationTarget;
 import javax.validation.constraintvalidation.ValidationTarget;
 
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Component
 //@SupportedValidationTarget(ValidationTarget.ANNOTATED_ELEMENT)
 public class LiveChatUniqueDayUserValidator implements ConstraintValidator<LiveChatUniqueDayUser, Day> {
+
 
     @Autowired
     private BaseServiceHelper baseServiceHelper;
@@ -23,11 +24,6 @@ public class LiveChatUniqueDayUserValidator implements ConstraintValidator<LiveC
     @Autowired
     private LiveChatAvailabilityService liveChatAvailabilityService;
 
-
-    @Override
-    public void initialize(LiveChatUniqueDayUser constraintAnnotation) {
-
-    }
 
     @Override
     public boolean isValid(Day day, ConstraintValidatorContext constraintValidatorContext) {

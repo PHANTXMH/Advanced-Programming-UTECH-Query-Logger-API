@@ -2,16 +2,13 @@ package com.ap.covid19.api.apcovid19.models;
 
 import com.ap.covid19.api.apcovid19.converters.StringAttributeConverter;
 import com.ap.covid19.api.apcovid19.enumerations.ComplainStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
