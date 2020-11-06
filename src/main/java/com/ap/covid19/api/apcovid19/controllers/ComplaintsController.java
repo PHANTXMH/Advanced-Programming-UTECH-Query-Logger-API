@@ -41,7 +41,7 @@ public class ComplaintsController {
         return new ResponseEntity<>(complaintsService.getAllComplainsByStudentID(studentID), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/by/student/id/and/status{student_id}/{status}", produces = "application/json")
+    @GetMapping(value = "/by/student/id/and/status/{student_id}/{status}", produces = "application/json")
     public ResponseEntity<List<Complaints>> getComplaintsByStudentIDAndStatus(@PathVariable("student_id") Long studentID, @PathVariable("status") ComplainStatus status){
         return new ResponseEntity<>(complaintsService.getAllComplainsByStudentIDAndStatus(studentID, status), HttpStatus.OK);
     }
