@@ -106,6 +106,6 @@ public class ComplaintsService extends BaseServiceHelper implements ComplaintsIn
 
     @Override
     public List<Complaints> getComplaintsByDistinctUserAndStatus(ComplainStatus complainStatus) {
-        return complaintsRepository.findDistinctCreatedUser_IdAndAndComplainStatus(complainStatus);
+        return null;//complaintsRepository.findDistinctCreatedUser_IdAndAndComplainStatus(complainStatus);
     }
 }
