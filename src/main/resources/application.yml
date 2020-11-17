@@ -16,7 +16,7 @@ spring:
     initialization-mode: always
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       javax:
         persistence:
