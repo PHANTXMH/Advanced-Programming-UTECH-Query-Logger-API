@@ -32,9 +32,9 @@ public class SwaggerConfig {
   }
 
   private ApiInfo apiInfo() {
-    return new ApiInfo("Advanced Programming web service", "A service to allow students and representative to communicate", "V1.00",
+    return new ApiInfo("Advanced Programming web Server", "A service to allow students and representative to communicate", "V1.00",
         "Terms of service",
-        new Contact("Ricardo Gaynor", "http://ricardogaynor.com", "ricardogaynorgaynor@gmail.com"),
+        new Contact("Ricardo Gaynor and Marcal Harrison", "http://ricardogaynor.com", "ricardogaynorgaynor@gmail.com"),
         "Advanced Programming",
         "http://advanceprogramming.com/license/", Collections.emptyList());
   }
