@@ -36,11 +36,11 @@ public class TimeStamp {
     //@JsonIgnore
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "created_user_id", updatable = false)
-    private User createdUser = new User();
+    private User createdUser;
 
     //@JsonIgnore
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mod_user_id")
-    private User modifyUser = new User();
+    private User modifyUser;
 
 }
