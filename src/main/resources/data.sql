@@ -1,19 +1,19 @@
 INSERT INTO public.users(
-id, created_at, deleted_at, updated_at, contact, email, first_name, last_name, password, role, username, created_user_id, mod_user_id)
+id, created_at, deleted_at, updated_at, contact, email, first_name, last_name, password, role, username)
 VALUES (1, CURRENT_TIMESTAMP, NULL , CURRENT_TIMESTAMP, '8768513343', 'ricardogaynorgaynor@gmail.com', 'Ricardo', 'Gaynor',
-'$2a$10$04fc3qJMnRCsRL8ylFnVhuhH2ySYLTi4zS4dPKV0OAOtPjQ05Cyre', 'STUDENT', '1605048', 1, 1); -- encrypted password id password
+'$2a$10$04fc3qJMnRCsRL8ylFnVhuhH2ySYLTi4zS4dPKV0OAOtPjQ05Cyre', 'STUDENT', '1605048' ); -- encrypted password id password
 
 
 INSERT INTO public.users(
-id, created_at, deleted_at, updated_at, contact, email, first_name, last_name, password, role, username, created_user_id, mod_user_id)
+id, created_at, deleted_at, updated_at, contact, email, first_name, last_name, password, role, username)
 VALUES (2, CURRENT_TIMESTAMP, NULL , CURRENT_TIMESTAMP, '8764860382', 'kerionwillis@gmail.com', 'Kerion', 'Willis',
-'$2a$10$04fc3qJMnRCsRL8ylFnVhuhH2ySYLTi4zS4dPKV0OAOtPjQ05Cyre', 'STUDENT', '1608987', 1, 1); -- encrypted password id password
+'$2a$10$04fc3qJMnRCsRL8ylFnVhuhH2ySYLTi4zS4dPKV0OAOtPjQ05Cyre', 'STUDENT', '1608987' ); -- encrypted password id password
 
 
 INSERT INTO public.users(
-id, created_at, deleted_at, updated_at, contact, email, first_name, last_name, password, role, username, created_user_id, mod_user_id)
+id, created_at, deleted_at, updated_at, contact, email, first_name, last_name, password, role, username)
 VALUES (3, CURRENT_TIMESTAMP, NULL , CURRENT_TIMESTAMP, '8763549876', 'chrispanther@gmail.com', 'Chris', 'Panther',
-'$2a$10$04fc3qJMnRCsRL8ylFnVhuhH2ySYLTi4zS4dPKV0OAOtPjQ05Cyre', 'STUDENT_REPRESENTATIVE', '1509999', 1, 1); -- encrypted password id password
+'$2a$10$04fc3qJMnRCsRL8ylFnVhuhH2ySYLTi4zS4dPKV0OAOtPjQ05Cyre', 'STUDENT_REPRESENTATIVE', '1509999'); -- encrypted password id password
 
 -- https://www.browserling.com/tools/bcrypt
 
