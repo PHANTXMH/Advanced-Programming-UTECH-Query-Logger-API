@@ -33,14 +33,14 @@ public class TimeStamp {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedAt;
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
+    //@JsonIgnore
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "created_user_id", updatable = false)
-    private User createdUser;
+    private User createdUser = new User();
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
+    //@JsonIgnore
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mod_user_id")
-    private User modifyUser;
+    private User modifyUser = new User();
 
 }

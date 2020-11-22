@@ -33,12 +33,14 @@ public class ComplaintResponseService extends BaseServiceHelper implements Compl
 
         Assert.notNull(complaintResponses, "Complaint response cannot be null");
 
-        Assert.notNull(complaintResponses.getComplaints(), "Complaint Object cannot be null");
+        //Assert.notNull(complaintResponses.getComplaints(), "Complaint Object cannot be null");
 
         Complaints complaints = complaintsRepository.findById(complaintResponses.getComplaints().getId()).orElseThrow(() ->
                 new ComplaintNotFoundException(String.format("Complaint with ID %s don't exists", complaintResponses.getComplaints().getId())));
 
         // validate the complaint if necessary
+
+        complaintResponses.setComplaints(complaints);
 
         User authenticatedUser = getAuthenticatedUser();
 
@@ -76,6 +78,12 @@ public class ComplaintResponseService extends BaseServiceHelper implements Compl
     @Override
     public List<ComplaintResponses> getAllComplaintResponsesByUserID(Long userID) {
         return complaintResponseRepository.findAllByCreatedUser_Id(userID);
+    }
+
+    @Override
+    public ComplaintResponses byID(Long id) {
+        return complaintResponseRepository.findById(id).orElseThrow(()
+                -> new ComplaintResponseNotFoundException(String.format("Reponse with ID %s was not found", String.valueOf(id))));
     }
 
 }

@@ -2,6 +2,7 @@ package com.ap.covid19.api.apcovid19.models;
 
 import com.ap.covid19.api.apcovid19.converters.StringAttributeConverter;
 import com.ap.covid19.api.apcovid19.enumerations.ComplainStatus;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,12 +41,13 @@ public class Complaints extends TimeStamp{
 
     @NotNull
     @Column(columnDefinition = "TEXT")
-    @Size(min = 25, max = 5000)
+    @Size(min = 6, max = 5000)
     @Convert(converter = StringAttributeConverter.class)
     private String query;
 
+    @JsonManagedReference // https://www.appsdeveloperblog.com/infinite-recursion-in-objects-with-bidirectional-relationships/
     @OneToMany(mappedBy = "complaints")
-    private List<ComplaintResponses> responses;
+    private List<ComplaintResponses> responses = new ArrayList<ComplaintResponses>();
 
   //  @Column(columnDefinition = "tinyint(1) default 0") this is for mysql
     @Column(columnDefinition = "boolean default true")
@@ -54,7 +57,7 @@ public class Complaints extends TimeStamp{
     @Temporal(TemporalType.TIMESTAMP)
     private Date readDate;
 
-//    @OneToMany(fetch = FetchType.EAGER)
+//    @OneToMany(fetch = FetchType.LAZY)
 //    @JoinColumn(nullable = true)
 //    private List<User> readBy;
 

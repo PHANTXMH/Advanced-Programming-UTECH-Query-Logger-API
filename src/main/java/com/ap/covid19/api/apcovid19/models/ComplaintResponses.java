@@ -2,6 +2,7 @@ package com.ap.covid19.api.apcovid19.models;
 
 
 import com.ap.covid19.api.apcovid19.converters.StringAttributeConverter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -42,9 +43,9 @@ public class ComplaintResponses extends TimeStamp{
     @Temporal(TemporalType.TIMESTAMP)
     private Date readDate;
 
-    @JsonIgnore
-    @JoinColumn(name = "complaint_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "complaints_id")
     private Complaints complaints;
 
 }

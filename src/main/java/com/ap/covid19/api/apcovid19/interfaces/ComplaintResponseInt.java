@@ -18,4 +18,7 @@ public interface ComplaintResponseInt {
     List<ComplaintResponses> getAllComplaintResponsesByComplaintIDAndUserID(Long complaintID, Long userID);
 
     List<ComplaintResponses> getAllComplaintResponsesByUserID(Long userID);
+
+
+    ComplaintResponses byID(Long id);
 }
