@@ -2,6 +2,7 @@ package com.ap.covid19.api.apcovid19.controllers;
 
 import com.ap.covid19.api.apcovid19.models.ApiResponse;
 import com.ap.covid19.api.apcovid19.models.LiveChatAvailability;
+import com.ap.covid19.api.apcovid19.models.LiveChatAvailableTime;
 import com.ap.covid19.api.apcovid19.services.LiveChatAvailabilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,9 +21,14 @@ public class LiveChatAvailabilityController {
 
     private final LiveChatAvailabilityService liveChatAvailabilityService;
 
-    @PostMapping(value = "/create", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<ApiResponse> createAvailableDays(@Valid @RequestBody List<LiveChatAvailability> liveChatAvailabilities){
+    @PostMapping(value = "/create", produces = "application/json")
+    public ResponseEntity<List<ApiResponse<LiveChatAvailability>>> createAvailableDays(@Valid @RequestBody List<LiveChatAvailability> liveChatAvailabilities){
         return new ResponseEntity<>(liveChatAvailabilityService.createAvailableDays(liveChatAvailabilities), HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/add/time/slot", produces = "application/json")
+    public ResponseEntity<ApiResponse<LiveChatAvailableTime>> addAvailableTimeSlot(@Valid @RequestBody LiveChatAvailableTime liveChatAvailableTime){
+        return new ResponseEntity<>(liveChatAvailabilityService.addAvailableTimeSlot(liveChatAvailableTime), HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/delete/{id}", produces = "application/json")

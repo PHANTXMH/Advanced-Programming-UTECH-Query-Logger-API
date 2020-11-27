@@ -3,13 +3,13 @@ package com.ap.covid19.api.apcovid19.models;
 
 import com.ap.covid19.api.apcovid19.enumerations.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -85,9 +85,9 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedAt;
 
-//    @OneToMany
-//    @JoinColumn(name = "created_user_id")
-//    private List<Complaints> complaints;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user")
+    private List<LiveChatAvailability> liveChatAvailabilities;
 
     public User(Long id, String email){
         this.id = id;

@@ -1,5 +1,6 @@
 package com.ap.covid19.api.apcovid19.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,8 @@ public class LiveChatAvailableTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    @ManyToOne
     @JoinColumn(name = "available_day")
     private LiveChatAvailability liveChatAvailability;
 
