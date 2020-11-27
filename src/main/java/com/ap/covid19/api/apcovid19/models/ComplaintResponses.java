@@ -32,7 +32,7 @@ public class ComplaintResponses extends TimeStamp{
 
     @NotNull
     @Column(columnDefinition = "TEXT")
-    @Size(min = 25, max = 5000)
+    @Size(min = 3, max = 5000)
     @Convert(converter = StringAttributeConverter.class)
     private String response;
 
