@@ -16,6 +16,8 @@ public interface ComplaintsInt {
 
     ApiResponse<Complaints> updateComplaints(final Complaints complaints) throws IllegalAccessException;
 
+    ApiResponse<Complaints> updateComplaints(final Long complaintID, ComplainStatus complainStatus) throws IllegalAccessException;
+
     ApiResponse<Complaints> deleteComplaints(final Long complaintID);
 
     List<Complaints> findAllComplaintsByServiceID(Long serviceID);

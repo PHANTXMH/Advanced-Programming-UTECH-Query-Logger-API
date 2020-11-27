@@ -4,6 +4,7 @@ import com.ap.covid19.api.apcovid19.enumerations.ComplainStatus;
 import com.ap.covid19.api.apcovid19.models.ApiResponse;
 import com.ap.covid19.api.apcovid19.models.Complaints;
 import com.ap.covid19.api.apcovid19.services.ComplaintsService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,13 @@ public class ComplaintsController {
     @PutMapping(value = "/update", produces = "application/json")
     public ResponseEntity<ApiResponse<Complaints>> updateComplaints(@Valid @RequestBody Complaints complaints) throws IllegalAccessException {
         return new ResponseEntity<>(complaintsService.updateComplaints(complaints), HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/update/status", produces = "application/json", params = {"complaintID", "status"})
+    @ApiOperation(value = "Update Complaint Status")
+    public ResponseEntity<ApiResponse<Complaints>> updateComplaintsStatus(@RequestParam("complaintID") Long complaintID,
+                                                                    @RequestParam("status") ComplainStatus status) throws IllegalAccessException {
+        return new ResponseEntity<>(complaintsService.updateComplaints(complaintID, status), HttpStatus.OK);
     }
 
 

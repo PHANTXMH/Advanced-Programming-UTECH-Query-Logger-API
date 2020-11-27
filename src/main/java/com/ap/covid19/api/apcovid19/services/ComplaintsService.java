@@ -79,6 +79,21 @@ public class ComplaintsService extends BaseServiceHelper implements ComplaintsIn
     }
 
     @Override
+    public ApiResponse<Complaints> updateComplaints(Long complaintID, ComplainStatus complainStatus) throws IllegalAccessException {
+        Complaints complaintToEdit = complaintsRepository.findById(complaintID).orElseThrow( () -> new
+                ComplaintNotFoundException(
+                String.format("Complain with ID %s does found exists or user dont't have permission to update the complaint",
+                        complaintID))
+        );
+        complaintToEdit.setComplainStatus(complainStatus);
+
+        complaintsRepository.save(complaintToEdit);
+
+        return new ApiResponse<>(HttpStatus.OK, "Complaint status was updated successfully", null, complaintToEdit, true);
+
+    }
+
+    @Override
     public ApiResponse<Complaints> deleteComplaints(Long complaintID) {
 
         Complaints complaintToDelete = complaintsRepository.findAllByCreatedUser_IdAndId(this.getUserDetails().getId(), complaintID).orElseThrow( () -> new
