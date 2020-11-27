@@ -31,10 +31,10 @@ public class ComplaintsController {
         return new ResponseEntity<>(complaintsService.updateComplaints(complaints), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/update/status", produces = "application/json", params = {"complaintID", "status"})
+    @PutMapping(value = "/update/status/{id}/{status}", produces = "application/json")
     @ApiOperation(value = "Update Complaint Status")
-    public ResponseEntity<ApiResponse<Complaints>> updateComplaintsStatus(@RequestParam("complaintID") Long complaintID,
-                                                                    @RequestParam("status") ComplainStatus status) throws IllegalAccessException {
+    public ResponseEntity<ApiResponse<Complaints>> updateComplaintsStatus(@PathVariable("id") Long complaintID,
+                                                                    @PathVariable("status") ComplainStatus status) throws IllegalAccessException {
         return new ResponseEntity<>(complaintsService.updateComplaints(complaintID, status), HttpStatus.OK);
     }
 
