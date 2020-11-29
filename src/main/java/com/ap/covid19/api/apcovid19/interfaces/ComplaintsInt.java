@@ -24,7 +24,6 @@ public interface ComplaintsInt {
 
     List<Complaints> getAllComplainsByStudentIDAndStatus(Long studentID, ComplainStatus complainStatus);
 
-
     List<Complaints> getComplaintsByDistinctUserAndStatus(ComplainStatus complainStatus);
 
 }
