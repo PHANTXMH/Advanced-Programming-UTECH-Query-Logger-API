@@ -27,7 +27,7 @@ public class ChatMessageService extends BaseServiceHelper implements ChatMessage
 
     @Override
     public Chat getMessagesByFromAndToUser(Long from, Long to){
-        return chatRepository.getChatByTo_IdAndFrom_Id(to, from);
+        return chatRepository.getChatByTo_IdAndFrom_IdOrTo_IdAndFrom_Id(to, from, from, to);
     }
 
     @Override
