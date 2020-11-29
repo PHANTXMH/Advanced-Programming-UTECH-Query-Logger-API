@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Setter
@@ -22,7 +23,8 @@ public class ChatMessages {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
+    @Size(min = 1, max = 5000)
     @Convert(converter = StringAttributeConverter.class)
     private String message;
 
