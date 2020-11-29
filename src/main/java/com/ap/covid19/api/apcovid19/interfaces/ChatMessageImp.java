@@ -1,14 +1,17 @@
 package com.ap.covid19.api.apcovid19.interfaces;
 
 import com.ap.covid19.api.apcovid19.models.Chat;
+import com.ap.covid19.api.apcovid19.models.ChatMessages;
 
 import java.util.List;
 
 public interface ChatMessageImp {
 
-    public List<Chat> getChatMessageForUser() throws IllegalAccessException;
+    List<Chat> getChatMessageForUser() throws IllegalAccessException;
 
-  //  public List<Chat> getMessagesByFromAndToUser() throws IllegalAccessException;
+    Chat getMessagesByFromAndToUser(Long from, Long to);
+
+    List<ChatMessages> getMessagesByChatID(Long chatID);
 
 
 }

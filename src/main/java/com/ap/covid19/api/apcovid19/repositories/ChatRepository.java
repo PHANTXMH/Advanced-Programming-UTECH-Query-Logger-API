@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ChatRepository extends JpaRepository<Chat, Long> {
 
-    Optional<Chat> getChatByTo_IdAndFrom_Id(Long to, Long from);
+    Chat getChatByTo_IdAndFrom_Id(Long to, Long from);
 
     boolean existsChatsByTo_IdAndFrom_Id(Long to, Long from);
 

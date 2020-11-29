@@ -30,13 +30,13 @@ public class NewChatMessageEventListener implements ApplicationListener<NewChatM
 
         Assert.notNull(newChatMessageEvent, "newChatMessageEvent cannot be null");
 
-        Optional<Chat> chatExist = chatRepository.getChatByTo_IdAndFrom_Id(newChatMessageEvent.getMessage().getTo(), newChatMessageEvent.getMessage().getFrom());
+        Chat chatExist = chatRepository.getChatByTo_IdAndFrom_Id(newChatMessageEvent.getMessage().getTo(), newChatMessageEvent.getMessage().getFrom());
 
         Long chatID;
         Chat chat;
-        if(chatExist.isPresent()){
-            chatID = chatExist.get().getId();
-            chat = chatExist.get();
+        if(chatExist != null){
+            chatID = chatExist.getId();
+            chat = chatExist;
         }else{
             // create new record and save to db then save the messages
             chat = new Chat(new User(newChatMessageEvent.getMessage().getTo()), new User(newChatMessageEvent.getMessage().getFrom()));
