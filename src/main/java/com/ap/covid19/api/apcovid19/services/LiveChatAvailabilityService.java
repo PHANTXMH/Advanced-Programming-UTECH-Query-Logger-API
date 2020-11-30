@@ -6,17 +6,20 @@ import com.ap.covid19.api.apcovid19.exceptions.AvailabilityNotFoundException;
 import com.ap.covid19.api.apcovid19.interfaces.LiveChatAvailInt;
 import com.ap.covid19.api.apcovid19.models.ApiResponse;
 import com.ap.covid19.api.apcovid19.models.LiveChatAvailability;
-import com.ap.covid19.api.apcovid19.models.LiveChatAvailableTime;
+import com.ap.covid19.api.apcovid19.models.LiveChatAvailableDays;
 import com.ap.covid19.api.apcovid19.models.User;
+import com.ap.covid19.api.apcovid19.repositories.LiveChatAvailabilityDaysRepository;
 import com.ap.covid19.api.apcovid19.repositories.LiveChatAvailabilityRepository;
-import com.ap.covid19.api.apcovid19.repositories.LiveChatAvailabilityTimeRepository;
+import com.ap.covid19.api.apcovid19.repositories.LiveChatAvailabilityDaysRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -25,23 +28,51 @@ public class LiveChatAvailabilityService extends BaseServiceHelper implements Li
 
     private final LiveChatAvailabilityRepository liveChatAvailabilityRepository;
 
-    private final LiveChatAvailabilityTimeRepository liveChatAvailabilityTimeRepository;
+    private final LiveChatAvailabilityDaysRepository liveChatAvailabilityDaysRepository;
 
 
     @Override
-    public List<ApiResponse<LiveChatAvailability>> createAvailableDays(List<LiveChatAvailability> liveChatAvailabilities) {
-        List<ApiResponse<LiveChatAvailability>> apiResponseList = new ArrayList<>();
-        liveChatAvailabilities.forEach(l -> {
-            try {
-                l.setUser(this.getAuthenticatedUser());
-                apiResponseList.add(new ApiResponse<>(HttpStatus.CREATED, "Live Chat Availability created", null, l, true));
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+    public ApiResponse<LiveChatAvailability> createAvailableDays(LiveChatAvailability liveChatAvailability) throws IllegalAccessException {
+
+        String successMessage = "Availability Session created successfully";
+
+        User user = getAuthenticatedUser();
+
+        liveChatAvailability.setUser(user);
+
+        LiveChatAvailability liveChatAvailabilityForUser = liveChatAvailabilityRepository.findByUser_Id(user.getId());
+
+        if(liveChatAvailabilityForUser != null){
+            //liveChatAvailability.setId(liveChatAvailabilityForUser.getId());
+            liveChatAvailabilityRepository.delete(liveChatAvailabilityForUser);
+            /*
+            log.info("Finish removing data");
+            List<LiveChatAvailableDays> liveChatAvailableDays = new ArrayList<>();
+            if(!CollectionUtils.isEmpty(liveChatAvailabilityForUser.getLiveChatAvailableDays())){
+                liveChatAvailabilityForUser.getLiveChatAvailableDays().forEach(l -> {
+                    boolean dayAlreadyExists = Boolean.FALSE;
+                    if(!CollectionUtils.isEmpty(liveChatAvailability.getLiveChatAvailableDays())){
+                        for(LiveChatAvailableDays day: liveChatAvailability.getLiveChatAvailableDays()){
+                            if(day.getDay().equals(l.getDay())) {
+                                dayAlreadyExists = Boolean.TRUE;
+                                break;
+                            }
+
+                        }
+                    }
+                    if(!dayAlreadyExists)
+                        liveChatAvailableDays.add(l);
+                });
+                liveChatAvailability.setLiveChatAvailableDays(liveChatAvailableDays);
             }
-        });
-        liveChatAvailabilityRepository.saveAll(liveChatAvailabilities);
+            */
+            successMessage = "Availability Session was updated successfully";
+        }
+
+
+        liveChatAvailabilityRepository.save(liveChatAvailability);
         log.info("Creating Live Chat Availability Day");
-        return apiResponseList;
+        return new ApiResponse<>(successMessage.equals("Availability Session was updated successfully") ? HttpStatus.OK : HttpStatus.CREATED, successMessage, null, liveChatAvailability, true);
     }
 
     @Override
@@ -62,19 +93,19 @@ public class LiveChatAvailabilityService extends BaseServiceHelper implements Li
     }
 
     @Override
-    public List<LiveChatAvailability> viewAllByStudentRepID(Long studentRepID) {
-        return liveChatAvailabilityRepository.findAllByUser_Id(studentRepID);
+    public LiveChatAvailability viewAllByStudentRepID(Long studentRepID) {
+        return liveChatAvailabilityRepository.findByUser_Id(studentRepID);
     }
 
     @Override
     public boolean isDayForUserAlreadyExists(Day day, Long userID) {
-        return !liveChatAvailabilityRepository.findFirstByDayAndUser_Id(day, userID).isPresent();
+        return false;//!liveChatAvailabilityRepository.findFirstByDayAndUser_Id(day, userID).isPresent();
     }
 
     @Override
-    public ApiResponse<LiveChatAvailableTime> addAvailableTimeSlot(LiveChatAvailableTime liveChatAvailableTime) {
+    public ApiResponse<LiveChatAvailableDays> addAvailableTimeSlot(LiveChatAvailableDays liveChatAvailableTime) {
 
-        liveChatAvailabilityTimeRepository.save(liveChatAvailableTime);
+        liveChatAvailabilityDaysRepository.save(liveChatAvailableTime);
 
         return new ApiResponse<>(HttpStatus.OK, "Time slot was created successfully", null, liveChatAvailableTime, true);
 

@@ -10,8 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
+import java.sql.Time;
 import java.util.List;
 
 @Setter
@@ -19,27 +18,27 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "live_chat_availability",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"day", "user_id"}, name = "uniqueDayUserIDConstraint")})
+@Table(name = "live_chat_availability")
 public class LiveChatAvailability {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @LiveChatUniqueDayUser(message = "day already exists for user")
-    @Column
-    @Enumerated(EnumType.STRING)
-    private Day day;
-
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column
+    private Time startTime;
+
+    @Column
+    private Time endTime;
+
     @JsonManagedReference
-    @OneToMany(mappedBy = "liveChatAvailability")
-    List<LiveChatAvailableTime> liveChatAvailableTimes;
+    @OneToMany(mappedBy = "liveChatAvailability", cascade = CascadeType.ALL)
+    List<LiveChatAvailableDays> liveChatAvailableDays;
 
 
 }
