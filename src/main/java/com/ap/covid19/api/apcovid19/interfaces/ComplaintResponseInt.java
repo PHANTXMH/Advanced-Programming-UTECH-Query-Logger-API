@@ -19,6 +19,5 @@ public interface ComplaintResponseInt {
 
     List<ComplaintResponses> getAllComplaintResponsesByUserID(Long userID);
 
-
     ComplaintResponses byID(Long id);
 }

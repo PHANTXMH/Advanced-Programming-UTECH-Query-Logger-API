@@ -36,8 +36,12 @@ public class ComplaintResponses extends TimeStamp{
     @Convert(converter = StringAttributeConverter.class)
     private String response;
 
-    @Column
+    //@Column
+    @Transient
     private Boolean read;
+
+    @Column
+    private String isRead;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)

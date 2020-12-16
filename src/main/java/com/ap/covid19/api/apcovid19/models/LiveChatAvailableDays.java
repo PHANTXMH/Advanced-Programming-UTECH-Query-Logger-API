@@ -32,5 +32,4 @@ public class LiveChatAvailableDays {
     @Enumerated(EnumType.STRING)
     private Day day;
 
-
 }

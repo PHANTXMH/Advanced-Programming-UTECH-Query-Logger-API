@@ -32,7 +32,7 @@ public class ChatMessages {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    @Column
+    @Column(name = "is_read")
     private Boolean read;
 
     @Column

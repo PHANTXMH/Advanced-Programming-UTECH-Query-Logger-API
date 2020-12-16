@@ -50,8 +50,12 @@ public class Complaints extends TimeStamp{
     private List<ComplaintResponses> responses = new ArrayList<ComplaintResponses>();
 
   //  @Column(columnDefinition = "tinyint(1) default 0") this is for mysql
-    @Column(columnDefinition = "boolean default true")
+  //  @Column(columnDefinition = "boolean default true")
+    @Transient
     private Boolean read;
+
+    @Column
+    private String isRead;
 
     @Column()
     @Temporal(TemporalType.TIMESTAMP)
